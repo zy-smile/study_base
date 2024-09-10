@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+			}
+		</style>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+					"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<script type="module">
+			import * as THREE from "three"
+			import { OrbitControls } from "three/addons/controls/OrbitControls.js"
+			// 创建场景、相机、渲染器
+			const scence = new THREE.Scene()
+
+			const camera = new THREE.PerspectiveCamera(
+				45,
+				window.innerWidth / window.innerHeight,
+				0.25,
+				60
+			)
+			const renderer = new THREE.WebGLRenderer()
+			renderer.setSize(window.innerWidth, window.innerHeight)
+			document.body.appendChild(renderer.domElement)
+
+			// 创建球体
+			const geometry = new THREE.SphereGeometry(30, 30, 10)
+			const texture = new THREE.TextureLoader().load("images/room3.jpg")
+			texture.colorSpace = THREE.SRGBColorSpace
+			const material = new THREE.MeshBasicMaterial({
+				map: texture,
+			})
+			const cube = new THREE.Mesh(geometry, material)
+			cube.geometry.scale(1, 1, -1)
+			scence.add(cube)
+			camera.position.z = 0.1
+
+			const controls = new OrbitControls(camera, renderer.domElement)
+			controls.enableDamping = true
+			controls.enableZoom = true
+			controls.enablePan = true
+			controls.rotateSpeed = 1
+			controls.update()
+			renderer.render(scence, camera)
+			function animate() {
+				requestAnimationFrame(animate)
+				controls.update()
+				renderer.render(scence, camera)
+			}
+			renderer.setAnimationLoop(animate)
+			// 动画
+			// function animate() {
+			// 	requestAnimationFrame(animate)
+			// 	cube.rotation.x += 0.01
+			// 	cube.rotation.y += 0.01
+			// 	renderer.render(scence, carma)
+			// }
+			// animate()
+			function getTexturesFromAtlasFile(atlasImgUrl, tilesNum) {
+				const textures = []
+
+				for (let i = 0; i < tilesNum; i++) {
+					textures[i] = new THREE.Texture()
+				}
+
+				new THREE.ImageLoader().load(atlasImgUrl, (image) => {
+					let canvas, context
+					const tileWidth = image.height
+
+					for (let i = 0; i < textures.length; i++) {
+						canvas = document.createElement("canvas")
+						context = canvas.getContext("2d")
+						canvas.height = tileWidth
+						canvas.width = tileWidth
+						context.drawImage(
+							image,
+							tileWidth * i,
+							0,
+							tileWidth,
+							tileWidth,
+							0,
+							0,
+							tileWidth,
+							tileWidth
+						)
+						textures[i].colorSpace = THREE.SRGBColorSpace
+						textures[i].image = canvas
+						textures[i].needsUpdate = true
+					}
+				})
+
+				return textures
+			}
+			function resize() {
+				camera.aspect = window.innerWidth / window.innerHeight
+				camera.updateProjectionMatrix()
+				renderer.setSize(window.innerWidth, window.innerHeight)
+			}
+			window.addEventListener("resize", resize)
+		</script>
+	</body>
+</html>

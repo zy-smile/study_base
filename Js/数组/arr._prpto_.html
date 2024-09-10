@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			let arr = []
+			console.log(arr)
+			console.log(arr.__proto__)
+			let obj = {
+				a: 1,
+			}
+			let dateObj = new Date()
+			let yy = dateObj.getFullYear()
+			let mm = dateObj.getMonth() + 1
+			let dd = dateObj.getDate()
+			let DD = dateObj.getDay()
+			let HH = dateObj.getHours()
+			let MM = dateObj.getMinutes()
+			let SS = dateObj.getSeconds()
+			console.log(
+				yy +
+					"-" +
+					mm +
+					"-" +
+					dd +
+					"-" +
+					DD +
+					"-" +
+					HH +
+					":" +
+					MM +
+					":" +
+					SS
+			)
+		</script>
+	</body>
+</html>

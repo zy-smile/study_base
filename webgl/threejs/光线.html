@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+					"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<script type="module">
+			import * as THREE from "three"
+			// 创建场景、相机、渲染器
+			const scene = new THREE.Scene()
+			const camera = new THREE.PerspectiveCamera(
+				75,
+				window.innerWidth / window.innerHeight,
+				0.1,
+				1000
+			)
+			const renderer = new THREE.WebGLRenderer()
+			renderer.setSize(window.innerWidth, window.innerHeight)
+			document.body.appendChild(renderer.domElement)
+
+			// 创建物体
+			const geometry = new THREE.BoxGeometry(1, 1, 1)
+			const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+			const cube = new THREE.Mesh(geometry, material)
+			scene.add(cube)
+			camera.position.z = 5
+			// 光源
+			const light = new THREE.PointLight(0xff0000, 1, 100)
+			light.position.set(50, 50, 50)
+			scene.add(light)
+
+			renderer.render(scene, camera)
+
+			// 动画
+			function animate() {
+				requestAnimationFrame(animate)
+				cube.rotation.x += 0.01
+				cube.rotation.y += 0.01
+				renderer.render(scene, camera)
+			}
+			animate()
+			const raycaster = new THREE.Raycaster()
+			const pointer = new THREE.Vector2()
+
+			function onPointerMove(event) {
+				// calculate pointer position in normalized device coordinates
+				// (-1 to +1) for both components
+
+				pointer.x = (event.clientX / window.innerWidth) * 2 - 1
+				pointer.y = -(event.clientY / window.innerHeight) * 2 + 1
+			}
+
+			function render() {
+				// update the picking ray with the camera and pointer position
+				raycaster.setFromCamera(pointer, camera)
+
+				// calculate objects intersecting the picking ray
+				const intersects = raycaster.intersectObjects(scene.children)
+
+				for (let i = 0; i < intersects.length; i++) {
+					intersects[i].object.material.color.set(0xff0000)
+				}
+
+				renderer.render(scene, camera)
+			}
+
+			window.addEventListener("pointermove", onPointerMove)
+
+			window.requestAnimationFrame(render)
+		</script>
+	</body>
+</html>

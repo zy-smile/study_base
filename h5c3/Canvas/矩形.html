@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvasId" width="600" height="600"></canvas>
+    <script>
+        let myCanvas = document.getElementById('canvasId')
+        let ctx = myCanvas.getContext('2d')
+        ctx.fillStyle = '#ff5500'
+        ctx.stokeStyle = '#ff4400'
+        ctx.fillRect(10,10,400,100)
+        ctx.strokeRect(100,150,300,100)
+        ctx.clearRect(20,20,380,80)
+
+    </script>
+</body>
+</html>

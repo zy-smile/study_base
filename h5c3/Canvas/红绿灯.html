@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+        function draw(type) {
+            // 1 红灯 2黄灯 3绿灯
+            ctx.beginPath()
+            ctx.arc(300,50,40,0,Math.PI * 2,true)
+            ctx.fillStyle = type === 1 ? '#f10f21' : '#b2abab'
+            ctx.fill()
+            ctx.closePath()
+            ctx.beginPath()
+            ctx.fillStyle = type === 2 ? '#fceb3f' : '#b2abab'
+            ctx.arc(300,150,40,0,Math.PI*2, true)
+            ctx.fill()
+            ctx.closePath()
+            ctx.beginPath()
+            ctx.fillStyle = type === 3 ? '#63e519' : '#b2abab'
+            ctx.arc(300,250,40,0,Math.PI * 2, true)
+            ctx.fill()
+            ctx.closePath()
+        }
+        function drawText(text) {
+
+        }
+        let time = 20
+        let isgreen = true
+        draw(3)
+        let timer = setInterval(() => {
+            time--
+            if(time === 3 && isgreen) {
+                draw(2)
+            }
+            if(time === 0) {
+                time = 20
+                if(isgreen) {
+                    isgreen = false
+                    draw(1)
+                }else {
+                    isgreen = true
+                    draw(3)
+                }
+            }
+            drawText(time)
+        },1000)
+    </script>
+</body>
+</html>
