@@ -1,8 +1,7 @@
-enum Sort {
-	a,
-	b,
-	c,
-	d,
+enum Size {
+	small,
+	middle,
+	large
 }
-console.log(Sort.a)
-const num: number = Sort.a
+const info_size = Size.small
+console.log(info_size)

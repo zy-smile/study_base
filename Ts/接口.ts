@@ -4,7 +4,6 @@ interface Person {
 	tel: number
 	readonly idcard: Number
 }
-
 let user: Person = {
 	username: "123",
 	tel: 123123,
@@ -26,3 +25,5 @@ getUserInfo({
 	tel: 123123,
 	idcard: 22222,
 })
+
+

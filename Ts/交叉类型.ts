@@ -11,5 +11,5 @@ interface User2 {
 let persons: User1 & User2 = {
 	name: "张三",
 	age: 12,
-	sex: 1,
+	sex: 1
 }

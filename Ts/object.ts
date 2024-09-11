@@ -11,6 +11,6 @@ let obj: obj = {
 //     b: 'we'
 // }
 // 对象的解构
-let {a, b} = obj
-console.log(a+ "------" + b);
+let {aa, b} = obj
+console.log(aa+ "------" + b);
 

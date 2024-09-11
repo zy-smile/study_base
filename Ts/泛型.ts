@@ -14,3 +14,11 @@ function getInfo<T extends Object, U extends String, H>(
 	return info
 }
 getInfo<object, string, string>({ username: "" }, "username", "张三")
+
+
+function getInfoById<T>(id: T):T {
+	//....
+	return id
+}
+
+getInfoById(1)
