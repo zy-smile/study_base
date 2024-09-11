@@ -1,0 +1,25 @@
+## 代码分割
+
+1. import()动态引入
+
+2. React.lazy()
+
+组件懒加载
+
+页面懒加载的同时做加载 loading 优化
+
+```js
+import React, { Suspense } from "react"
+
+const OtherComponent = React.lazy(() => import("./OtherComponent"))
+
+function MyComponent() {
+	return (
+		<div>
+			<Suspense fallback={<div>Loading...</div>}>
+				<OtherComponent />
+			</Suspense>
+		</div>
+	)
+}
+```

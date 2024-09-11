@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			class MyInput extends React.Component {
+				constructor(props) {
+					super(props)
+					this.change = this.change.bind(this)
+				}
+				change(event) {
+					this.props.changeHandle(event.target.value, this.props.name)
+				}
+				render() {
+					let value = this.props.value
+					return (
+						<input
+							type="text"
+							value={value}
+							onChange={this.change}
+						/>
+					)
+				}
+			}
+
+			class MyForm extends React.Component {
+				constructor(props) {
+					super(props)
+					this.state = {
+						num: 1,
+						name: "",
+					}
+					this.changeHandle = this.changeHandle.bind(this)
+				}
+				changeHandle(val, name) {
+					this.setState({
+						num: val,
+						name: name,
+					})
+				}
+				render() {
+					let value1 =
+						this.state.name == "b"
+							? this.state.num / 2
+							: this.state.num
+					let value2 =
+						this.state.name == "a"
+							? this.state.num * 2
+							: this.state.num
+					return (
+						<div>
+							<MyInput
+								value={value1}
+								name="a"
+								changeHandle={this.changeHandle}
+							/>
+							<MyInput
+								value={value2}
+								name="b"
+								changeHandle={this.changeHandle}
+							/>
+						</div>
+					)
+				}
+			}
+
+			ReactDOM.render(<MyForm />, document.getElementById("app"))
+		</script>
+	</body>
+</html>

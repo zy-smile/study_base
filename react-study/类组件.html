@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			class User extends React.Component {
+				constructor(props) {
+					super()
+					this.user = props.user
+				}
+				render() {
+					return (
+						<ul>
+							<li>姓名：{this.user.name}</li>
+							<li>年龄：{this.user.age}</li>
+							<li>性别：{this.user.sex == 1 ? "男" : "女"}</li>
+						</ul>
+					)
+				}
+			}
+
+			ReactDOM.render(
+				<User user={{ name: "张三", age: 12, sex: 1 }} />,
+				document.getElementById("app")
+			)
+		</script>
+	</body>
+</html>

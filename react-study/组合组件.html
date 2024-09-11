@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="example"></div>
+		<script type="text/babel">
+			function Lists({ sports }) {
+				return (
+					<ul>
+						{sports.map((item, index) => (
+							<ListItem name={item} index={index} key={index} />
+						))}
+					</ul>
+				)
+			}
+			function ListItem(props) {
+				return (
+					<li>
+						{props.index}: {props.name}
+					</li>
+				)
+			}
+			let arr = [
+				"飞镖",
+				"滑板",
+				"潜水",
+				"拳击",
+				"射箭",
+				"跳绳",
+				"攀岩",
+				"冰球",
+				"棒球",
+				"高尔夫",
+			]
+			ReactDOM.render(
+				<Lists sports={arr} />,
+				document.getElementById("example")
+			)
+		</script>
+	</body>
+</html>

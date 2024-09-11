@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			class MyForm extends React.Component {
+				constructor(props) {
+					super(props)
+					this.state = {
+						username: "",
+						sex: "",
+						ischecked: true,
+					}
+					this.change = this.change.bind(this)
+					this.submit = this.submit.bind(this)
+				}
+				change(event) {
+					let value =
+						name == "ischecked"
+							? event.target.checked
+							: event.target.value
+					let name = event.target.name
+					this.setState({
+						[name]: value,
+					})
+				}
+				submit(event) {
+					event.preventDefault()
+					console.log(this.state)
+				}
+				render() {
+					return (
+						<div>
+							<input
+								type="text"
+								value={this.state.username}
+								name="username"
+								onChange={this.change}
+							/>
+							勾选：
+							<input
+								type="checkbox"
+								name="ischecked"
+								onChange={this.change}
+								checked={this.state.ischecked}
+							/>
+							<select
+								name="sex"
+								id=""
+								value={this.state.sex}
+								onChange={this.change}
+							>
+								<option value="1">男</option>
+								<option value="2">女</option>
+							</select>
+							<button onClick={this.submit}>提交</button>
+						</div>
+					)
+				}
+			}
+
+			ReactDOM.render(<MyForm />, document.getElementById("app"))
+		</script>
+	</body>
+</html>

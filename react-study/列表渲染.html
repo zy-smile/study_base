@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			function ListItem(props) {
+				let lists = props.lists
+				return (
+					<ul>
+						{lists.map((item, index) => (
+							<li key={index.toString()}>{item.label}</li>
+						))}
+					</ul>
+				)
+			}
+
+			class Lists extends React.Component {
+				constructor(props) {
+					super(props)
+					this.state = {
+						lists: [
+							{
+								label: "吃饭",
+							},
+							{
+								label: "睡觉",
+							},
+						],
+					}
+					this.pushHandle = this.pushHandle.bind(this)
+				}
+				pushHandle() {
+					this.setState((state) => ({
+						lists: [
+							...state.lists,
+							{ label: "打豆豆" + (state.lists.length + 1) },
+						],
+					}))
+				}
+				render() {
+					return (
+						<div>
+							<ListItem lists={this.state.lists} />
+							<button onClick={this.pushHandle}>添加</button>
+						</div>
+					)
+				}
+			}
+
+			ReactDOM.render(<Lists />, document.getElementById("app"))
+		</script>
+	</body>
+</html>

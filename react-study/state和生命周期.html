@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			class User extends React.Component {
+				constructor(props) {
+					super(props)
+					this.user = props.user
+				}
+				render() {
+					return (
+						<div>
+							<ul>
+								<li>姓名：{this.user.name}</li>
+								<li>年龄：{this.user.age}</li>
+								<li>
+									性别：{this.user.sex == 1 ? "男" : "女"}
+								</li>
+							</ul>
+							<Clock user={{ age: 12 }} />
+						</div>
+					)
+				}
+			}
+			class Clock extends React.Component {
+				constructor(props) {
+					super(props)
+					this.state = {
+						date: new Date(),
+						age: 12,
+					}
+					this.timeId = null
+					console.log(this.state.date)
+					console.log(this.user)
+				}
+				changeTime() {
+					this.setState({
+						date: new Date(),
+						age: ++this.state.age + this.user.age,
+					})
+					// this.setState((state, props) => ({
+					// 	date: new Date(),
+					// 	age: ++state.age + props.user.age,
+					// }))
+				}
+				componentDidMount() {
+					console.log("页面渲染完成")
+					this.timeId = setInterval(() => {
+						this.changeTime()
+					}, 1000)
+				}
+				componentUnMount() {
+					console.log("页面被卸载")
+					clearInterval(this.timeId)
+				}
+				componentWillMount() {
+					console.log("页面将要被渲染")
+				}
+				componentWillUpdate() {
+					console.log("页面将要更新")
+				}
+				componentDidUpdate() {
+					console.log("页面更新完成")
+				}
+				componentWillUnmount() {
+					console.log("页面组件将要被移除")
+				}
+				render() {
+					return (
+						<h4>
+							{this.state.age}标题组件{this.state.date.toString()}
+						</h4>
+					)
+				}
+			}
+			ReactDOM.render(
+				<User user={{ name: "张三", age: 12, sex: 1 }} />,
+				document.getElementById("app")
+			)
+		</script>
+	</body>
+</html>

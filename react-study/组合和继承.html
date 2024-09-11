@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="example"></div>
+		<script type="text/babel">
+			function CardItem(props) {
+				return (
+					<div>
+						<h1>标题</h1>
+						{props.children}
+						{props.text}
+					</div>
+				)
+			}
+			function Text(props) {
+				return <h4>这里是内容。。。。。</h4>
+			}
+			class Cards extends React.Component {
+				constructor(props) {
+					super(props)
+				}
+
+				render() {
+					return (
+						<div>
+							<h3>组件</h3>
+							<CardItem text={<Text />}>这里是默认内容</CardItem>
+						</div>
+					)
+				}
+			}
+			ReactDOM.render(<Cards />, document.getElementById("example"))
+		</script>
+	</body>
+</html>

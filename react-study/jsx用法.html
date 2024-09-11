@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			let name = "里斯"
+			let content = (
+				<div>
+					<h1>{name}这是标题</h1>
+					<p>这里是内容这是是内容</p>
+				</div>
+			)
+			ReactDOM.render(content, document.getElementById("app"))
+		</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="./js/react.min.js"></script>
+		<script src="./js/react-dom.min.js"></script>
+		<script src="./js/babel.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			class MyButton extends React.Component {
+				constructor(props) {
+					super(props)
+					this.handle = this.handle.bind(this)
+				}
+				handle(event) {
+					console.log(event)
+					// console.log(this) //undefined
+					alert("点击了")
+				}
+				render() {
+					return (
+						<button onClick={(event) => this.handle(event)}>
+							按钮
+						</button>
+					)
+				}
+			}
+			ReactDOM.render(<MyButton />, document.getElementById("app"))
+		</script>
+	</body>
+</html>
