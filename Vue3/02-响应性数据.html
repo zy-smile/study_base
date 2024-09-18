@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+		<script type="module">
+			const { createApp, ref, reactive } = Vue
+			const app = createApp({
+				template: `
+        <h1>{{info.msg}}{{info.count}}:{{count}}</h1>
+        <button @click="clickFn">按钮</button>
+        <p>{{info.text.toString()}}</p>
+        <p>{{info.style.fontSize}}</p>
+        `,
+				setup() {
+					const count = ref(0)
+					const info = reactive({
+						msg: "success",
+						text: ["success", "fail"],
+						style: {
+							color: "red",
+						},
+					})
+					// info = { msg: "fail" }
+					function clickFn() {
+						count.value++
+						info.count = count
+						info.style.fontSize = "12"
+						console.log(info.count)
+					}
+					return {
+						count,
+						info,
+						clickFn,
+					}
+				},
+			}).mount("#app")
+		</script>
+	</body>
+</html>
