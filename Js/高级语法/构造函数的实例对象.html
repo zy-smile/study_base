@@ -1,25 +1,65 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
+		<meta charset="utf-8" />
 		<title></title>
 	</head>
 	<script>
-		function setDate(uname,age,sex) {
-			this.uname = uname;
-			this.age = age;
-			this.sex = sex;
-			this.sing = function() {
-				console.log('动画');
+		function setDate(uname, age, sex) {
+			this.uname = uname
+			this.age = age
+			this.sex = sex
+			this.sing = function () {
+				console.log("动画")
 			}
-			
 		}
-		var sew =new setDate('小明',18,'男');
-		console.log(setDate.prototype);
-		console.log(sew.__proto__);
-		console.log(Object.prototype)
-		console.log(setDate.prototype.constructor);
+		class setHours extends setDate {
+			constructor(uname, age, sex) {
+				super(uname, age, sex)
+			}
+			sayHi() {
+				console.log("你好")
+			}
+		}
+
+		var sew = new setDate("小明", 18, "男")
+		var shour = new setHours("小明", 18, "男")
+		// console.log(setDate.prototype)
+		// console.log(sew.__proto__)
+		// console.log(Object.prototype)
+		// console.log(setDate.prototype.constructor)
+		// console.log(sew.__proto__ === setDate.prototype)
+		// console.log(shour.__proto__ === setHours.prototype)
+		// console.log(shour.__proto__.__proto__ === setDate.prototype)
+		// console.log(
+		// 	shour.__proto__.__proto__ ===
+		// 		setHours.prototype.__proto__.constructor.prototype
+		// )
+		class Animal {}
+		class Dog extends Animal {}
+		let dog = new Dog()
+		console.log(dog.__proto__.__proto__ === Animal.prototype, "dog")
+		var checkIfInstanceOf = function (obj, classFunction) {
+			if (
+				obj === null ||
+				obj === undefined ||
+				classFunction === undefined ||
+				classFunction === null
+			)
+				return false
+
+			return Object(obj) instanceof classFunction
+		}
+		let result = checkIfInstanceOf(new Dog(), Animal)
+		console.log(result)
+		function Fun1() {
+			this.age = 1
+		}
+		function Fun2() {
+			this.age = 2
+		}
+		let box = new Fun1()
+		let result1 = checkIfInstanceOf(box, Fun2)
 	</script>
-	<body>
-	</body>
+	<body></body>
 </html>

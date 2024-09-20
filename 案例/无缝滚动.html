@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.scroll_box {
+				position: relative;
+				width: 300px;
+				height: 300px;
+				overflow: scroll;
+				border: 1px solid #333;
+			}
+			.scroll_list {
+				/* transition: transform 0.4s ease-in; */
+			}
+			.scroll_list_item {
+				height: 40px;
+				width: 100%;
+				background-color: #e8e8e8;
+				line-height: 40px;
+				text-align: center;
+			}
+			.animation_class {
+				transition: transform 0.4s ease-in;
+			}
+			button {
+				margin-left: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="scroll_box">
+			<div class="scroll_list animation_class">
+				<div class="scroll_list_item">1</div>
+				<div class="scroll_list_item">2</div>
+				<div class="scroll_list_item">3</div>
+				<div class="scroll_list_item">4</div>
+				<div class="scroll_list_item">5</div>
+				<div class="scroll_list_item">6</div>
+				<div class="scroll_list_item">7</div>
+				<div class="scroll_list_item">8</div>
+				<div class="scroll_list_item">9</div>
+				<div class="scroll_list_item">10</div>
+			</div>
+		</div>
+		<button onclick="start()">开始动画</button>
+		<button onclick="end()">结束动画</button>
+		<button onclick="pushData()">插入数据</button>
+		<script>
+			let container = document.querySelector(".scroll_box")
+			let listEl = document.querySelector(".scroll_list")
+			let cloneEl = listEl.cloneNode(true)
+			cloneEl.classList.add("clone_el")
+			listEl.appendChild(cloneEl)
+			console.log(cloneEl)
+			let step = 0
+			let timer = null
+			function animation() {
+				let classList = listEl.classList
+				step += 40
+
+				let total = (listEl.children.length - 1) * 40
+				console.log(step, total)
+				if (step > total) {
+					step = 40
+					if (Array.from(classList).includes("animation_class")) {
+						console.log(true)
+						listEl.classList.remove("animation_class")
+					}
+					requestAnimationFrame(() => {
+						listEl.style.transform = `translateY(0px)`
+						requestAnimationFrame(() => {
+							listEl.classList.add("animation_class")
+						})
+						requestAnimationFrame(() => {
+							listEl.style.transform = `translateY(-${step}px)`
+						})
+					})
+				} else {
+					listEl.style.transform = `translateY(-${step}px)`
+				}
+			}
+			function start() {
+				timer = setInterval(animation, 1000)
+			}
+			function end() {
+				if (timer) {
+					clearInterval(timer)
+					timer = null
+					// step = 40
+				}
+			}
+			function pushData() {
+				console.log(listEl.children.length, "before")
+				let length = listEl.children.length
+				let item = document.createElement("div")
+				item.className = "scroll_list_item"
+				item.innerText = length
+				let cloneItem = item.cloneNode(true)
+				listEl.insertBefore(item, listEl.children[length - 1])
+
+				cloneEl.appendChild(cloneItem)
+				console.log(listEl, "after")
+			}
+			//监听浏览器tab标签页进入后台事件
+			// window.addEventListener("visibilitychange", function () {
+			// 	if (document.hidden) {
+			// 		//进入后台
+			// 		end()
+			// 	} else {
+			// 		//进入前台
+			// 		start()
+			// 	}
+			// })
+		</script>
+	</body>
+</html>
