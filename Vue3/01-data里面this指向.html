@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+	<div id="app"></div>
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<script type="module">
+		const { createApp } = Vue
+		const app = createApp({
+			template: `<h2>{{text}}</h2>`,
+			data() {
+				let that = this
+				return {
+					num: 123,
+					text: '这里是文字' + that.num
+				}
+			}
+		})
+		app.mount('#app')
+	</script>
+	</body>
+</html>

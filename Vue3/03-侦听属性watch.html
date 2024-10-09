@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+    </script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { createApp, watch, ref } from 'vue'
+        const template = `<h3>{{total}}</h3><button @click="add">加1</button>`
+
+
+        const app = createApp({
+            template,
+            setup() {
+                const total = ref(0)
+                const sum = ref(10)
+                function add() {
+                    total.value++
+                    sum.value--
+                }
+
+                watch([total,sum],(newVal,oldVal) => {
+                    console.log(newVal,'new')
+                    console.log(oldVal,'oldVal')
+                })
+
+                return {
+                    total,
+                    add
+                }
+            },
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>
