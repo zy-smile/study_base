@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.grid_box {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				grid-template-rows: repeat(5, 1fr);
+				grid-gap: 10px;
+				width: 500px;
+				height: 500px;
+				background-color: beige;
+			}
+			.grid_item {
+				background: red;
+			}
+			.item1 {
+				/* grid-column: span 2; */
+				/* grid-area: span 2 / span 2; */
+			}
+		</style>
+	</head>
+	<body>
+		<div class="grid_box">
+			<div class="grid_item item1">1</div>
+			<div class="grid_item item2">2</div>
+			<div class="grid_item">3</div>
+			<div class="grid_item">4</div>
+			<div class="grid_item">5</div>
+			<div class="grid_item">6</div>
+			<div class="grid_item">7</div>
+			<div class="grid_item">8</div>
+			<div class="grid_item">9</div>
+		</div>
+	</body>
+</html>
