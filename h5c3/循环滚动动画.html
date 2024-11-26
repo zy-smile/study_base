@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.container {
+				overflow: hidden;
+				display: flex;
+			}
+			.scroll_list {
+				display: flex;
+				animation: move 20s linear infinite;
+			}
+			@keyframes move {
+				from {
+					transform: translateX(-100%);
+				}
+				to {
+					transform: translateX(0);
+				}
+			}
+			.container:hover .scroll_list {
+				animation-play-state: paused;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="scroll_list">
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-1.png"
+					alt="" />
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-2.png"
+					alt="" />
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-3.png"
+					alt="" />
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-4.png"
+					alt="" />
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-5.png"
+					alt="" />
+			</div>
+			<div class="scroll_list">
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-1.png"
+					alt="" />
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-2.png"
+					alt="" />
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-3.png"
+					alt="" />
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-4.png"
+					alt="" />
+				<img
+					src="https://files.codelife.cc/itab.link/widgets/icon-1-5.png"
+					alt="" />
+			</div>
+		</div>
+	</body>
+</html>

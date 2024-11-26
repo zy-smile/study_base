@@ -1,0 +1,25 @@
+.bg {
+  background: #a7c080;
+}
+
+.bg .side_bar {
+  width: 300px;
+}
+
+.bg .box {
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.bg .box article {
+  font-size: 14px;
+}
+
+.bg:hover {
+  background-color: #a8a8a8;
+}
+
+.bg > div {
+  color: #fff;
+}
+/*# sourceMappingURL=index.css.map */

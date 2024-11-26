@@ -1,0 +1,33 @@
+$theme: #a7c080;
+$cursor_theme: #a8a8a8;
+
+// 混入
+@mixin round_border {
+  border-radius: 5px;
+
+  article {
+    font-size: 14px;
+  }
+}
+
+// 变量
+.bg {
+  background: $theme;
+  @import 'component.scss';
+
+  .box {
+    font-size: 12px;
+    @include round_border;
+  }
+
+  // 鼠标经过变色  不会显示在css中
+  // /*  鼠标经过变色*/
+
+  &:hover {
+    background-color: $cursor_theme;
+  }
+
+  >div {
+    color: #fff;
+  }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.shop_list {
+			}
+			.list_item {
+				position: relative;
+				height: 50px;
+				border-bottom: 1px solid #e8e8e8;
+			}
+			.add_btn {
+				float: right;
+				width: 30px;
+				height: 30px;
+				line-height: 30px;
+				border: 1px solid #e8e8e8;
+				border-radius: 50%;
+				text-align: center;
+				cursor: pointer;
+			}
+			.car_bottom {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				height: 60px;
+			}
+			.move_item {
+				position: absolute;
+				width: 30px;
+				height: 30px;
+				background-color: #fff;
+				border-radius: 50%;
+				right: 34px;
+				top: 10px;
+				animation: move1 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+			}
+			.move_inner {
+				width: 100%;
+				height: 100%;
+				background-color: red;
+				border-radius: 50%;
+				animation: move2 0.5s ease;
+			}
+
+			@keyframes move1 {
+				from {
+					display: block;
+					transform: translateX(0px);
+				}
+				to {
+					transform: translateX(-70vw);
+					display: none;
+				}
+			}
+			@keyframes move2 {
+				from {
+					transform: translateY(0px);
+				}
+				to {
+					transform: translateY(90vh);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="shop_list">
+			<div class="list_item">
+				<div
+					class="add_btn add_item"
+					data-id="0"
+					onclick="clickFun(event)">
+					+
+				</div>
+			</div>
+			<div class="list_item">
+				<span class="add_btn" data-id="1" onclick="clickFun(event)"
+					>+</span
+				>
+			</div>
+			<div class="list_item">
+				<span class="add_btn" data-id="2" onclick="clickFun(event)"
+					>+</span
+				>
+			</div>
+		</div>
+		<div class="car_bottom">商品数量：<span class="car_num">0</span></div>
+		<script>
+			var addBtn = document.querySelectorAll(".add_btn")
+			var carNum = document.querySelector(".car_num")
+			var moveItem = document.querySelectorAll(".move_item")
+			var moveInner = document.querySelectorAll(".move_inner")
+			let listItem = document.querySelectorAll(".list_item")
+			var num = 0
+			function clickFun(e) {
+				num++
+				carNum.innerHTML = num
+				console.log(e.target.dataset.id)
+				let id = e.target.dataset.id
+				id = id ? Number(id) : 0
+				let el = document.createElement("div")
+				el.className = "move_item"
+				el.innerHTML = `<div class="move_inner"></div>`
+				listItem[id].appendChild(el)
+
+				setTimeout(() => {
+					listItem[id].removeChild(el)
+				}, 500)
+			}
+		</script>
+	</body>
+</html>
