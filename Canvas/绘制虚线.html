@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<canvas id="my-canvas" width="600px" height="400px">
+			<p>你的浏览器不支持canvas</p>
+		</canvas>
+		<script>
+			let canvas = document.getElementById("my-canvas")
+			let ctx = canvas.getContext("2d")
+			ctx.save()
+			ctx.setLineDash([10, 6])
+			ctx.beginPath()
+			ctx.moveTo(100, 100)
+			ctx.lineTo(200, 100)
+			ctx.stroke()
+
+			ctx.restore()
+			ctx.beginPath()
+			ctx.moveTo(200, 100)
+			ctx.lineTo(200, 200)
+			ctx.stroke()
+		</script>
+	</body>
+</html>

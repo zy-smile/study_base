@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+		<canvas id="canvasId" width="600" height="600"></canvas>
+		<script>
+			let canvas = document.getElementById("canvasId")
+			let ctx = canvas.getContext("2d")
+			ctx.strokeStyle = "#ffaabb"
+			ctx.lineWidth = 5
+			// 绘制夹角
+			ctx.beginPath()
+			ctx.moveTo(100, 100)
+			ctx.lineTo(200, 100)
+			ctx.lineTo(100, 320)
+			ctx.closePath()
+			ctx.stroke()
+		</script>
+	</body>
+</html>

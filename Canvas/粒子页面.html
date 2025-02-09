@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				background-color: #000;
+			}
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvasId"></canvas>
+		<script>
+			let myCanvas = document.getElementById("canvasId")
+			let ctx = myCanvas.getContext("2d")
+			let clientW = document.body.clientWidth
+			let clientH = document.body.clientHeight
+			myCanvas.width = clientW
+			myCanvas.height = clientH
+
+			ctx.strokeStyle = "#fff"
+
+			function drawLine(x, y) {
+				ctx.beginPath()
+				ctx.moveTo(x, y)
+				ctx.lineTo(x, y + 5)
+				ctx.stroke()
+			}
+			let startY = 10
+			let startX = 10
+			drawLine(startX, startY)
+			setInterval(() => {
+				ctx.clearRect(0, 0, clientW, clientH)
+				if (startY > clientH) {
+					startY = 10
+				}
+				for (var i = 0; i < 100; i++) {
+					drawLine(clientW * Math.random(), clientH * Math.random())
+				}
+			}, 100)
+		</script>
+	</body>
+</html>

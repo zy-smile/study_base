@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+		<canvas id="canvasId" width="600" height="600"></canvas>
+		<script>
+			let canvas = document.getElementById("canvasId")
+			let ctx = canvas.getContext("2d")
+			let image = new Image()
+			image.width = 400
+			image.height = 400
+			image.src = "./images/girl.jpeg"
+			image.onload = function () {
+				console.log(this.width, this.height)
+				console.log(this.naturalWidth, this.naturalHeight)
+
+				/** @params
+				 * 图片源，裁剪图片坐标x,y,width,height,绘制坐标x,y,width,height
+				 **/
+				ctx.drawImage(image, 0, 0, 800, 800, 0, 0, 400, 400)
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.ggk {
+				width: 600px;
+				height: 400px;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			.text {
+				color: #000;
+				position: absolute;
+				left: 50%;
+				bottom: 126px;
+				transform: translate(-50%, 0);
+				font-size: 30px;
+				letter-spacing: 8px;
+				font-family: Cambria, Cochin, Georgia, Times, "Times New Roman",
+					serif;
+			}
+			#my-canvas {
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: 99;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="ggk">
+			<div class="text">一等奖</div>
+		</div>
+		<canvas id="my-canvas" width="600px" height="400px">
+			<p>你的浏览器不支持canvas</p>
+		</canvas>
+		<script>
+			let canvas = document.getElementById("my-canvas")
+			let ctx = canvas.getContext("2d")
+			let ggk = new Image()
+			ggk.src = "./images/ggk.jpg"
+			ggk.onload = function () {
+				ctx.drawImage(ggk, 0, 0, 600, 400)
+			}
+
+			let startFlag = false
+			let rt = {
+				sx: 200,
+				sy: 220,
+				ey: 280,
+				ex: 410,
+			}
+			canvas.onmousedown = function (e) {
+				let startX = e.pageX,
+					startY = e.pageY
+				if (
+					startX >= rt.sx &&
+					startX <= rt.ex &&
+					startY >= rt.sy &&
+					startY <= rt.ey
+				) {
+					startFlag = true
+				}
+			}
+			canvas.onmousemove = function (e) {
+				if (!startFlag) return e.preventDefault()
+				let startX = e.pageX,
+					startY = e.pageY
+				if (
+					startX >= rt.sx &&
+					startX <= rt.ex &&
+					startY >= rt.sy &&
+					startY <= rt.ey
+				) {
+					ctx.globalCompositeOperation = "destination-out"
+					drawArc(startX, startY, 20, 0, Math.PI * 2)
+				}
+			}
+			canvas.onmouseup = function (e) {
+				startFlag = false
+			}
+			function drawArc(x, y, r, start, end) {
+				ctx.beginPath()
+				ctx.arc(x, y, r, start, end)
+				ctx.closePath()
+				ctx.fill()
+			}
+			let text = document.querySelector(".text")
+			let random = Math.random()
+			console.log(random, "random")
+			if (random <= 0.1) {
+				text.innerHTML = "一等奖"
+			} else if (random > 0.1 && random < 0.3) {
+				text.innerHTML = "二等奖"
+			} else {
+				text.innerHTML = "三等奖"
+			}
+		</script>
+	</body>
+</html>

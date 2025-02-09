@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.collapse_box {
+				width: 300px;
+				height: 300px;
+				background-color: #ccc;
+				margin: 100px auto 0;
+			}
+			.collapse_item {
+				position: relative;
+			}
+			.content {
+				display: inline-block;
+				width: 100%;
+				max-height: 110px;
+				transition: max-height 0.2s ease-in-out;
+				overflow: hidden;
+			}
+
+			.btn {
+				position: absolute;
+				right: 10px;
+				bottom: 0;
+				color: #55b3ee;
+				font-size: 14px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="collapse_box">
+			<div class="collapse_item">
+				<span class="content"></span>
+				<span class="btn">展开</span>
+			</div>
+		</div>
+		<script>
+			let btn = document.querySelector(".btn")
+			let content = document.querySelector(".content")
+			// let collapseItem = document.querySelector(".collapse_item")
+			let contentText =
+				"在当今这个科技飞速发展的时代，科技犹如一把双刃剑，在给我们的生活带来诸多便利的同时，也在深刻地影响着我们的人际关系。科技极大地拓展了我们的社交圈。社交软件的兴起让我们能够轻松结识来自五湖四海的朋友，打破了地域的限制。以前，我们与远方亲友的联系只能依靠书信，耗时漫长且交流不便；而现在，只需轻点屏幕，就能与千里之外的人实时视频通话，仿佛对方就在眼前。各种社交平台也为我们提供了展示自我、分享生活的舞台，让我们有机会结识到志同道合的人，拓展了我们的人脉资源。"
+			let contentShow = contentText.slice(0, 80)
+			content.innerHTML = contentShow + "..."
+
+			btn.onclick = function () {
+				if (btn.innerHTML === "展开") {
+					content.classList.add("expanded")
+					content.innerHTML = contentText
+					btn.innerHTML = "收起"
+				} else {
+					content.classList.remove("expanded")
+					content.innerHTML = contentShow + "..."
+
+					btn.innerHTML = "展开"
+				}
+				content.style.maxHeight = content.scrollHeight + "px"
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+	<body>
+		<canvas id="canvasId" width="600" height="600"></canvas>
+		<script>
+			let mycanvas = document.getElementById("canvasId")
+			let ctx = mycanvas.getContext("2d")
+			// // 裁剪一个圆形
+			// let pathArc = new Path2D()
+			// pathArc.arc(300, 300, 200, 0, Math.PI * 2)
+			// ctx.clip(pathArc)
+
+			let image = new Image()
+			image.width = 400
+			image.height = 400
+			image.src = "./images/girl.jpeg"
+			image.onload = function () {
+				console.log(this.width, this.height)
+				console.log(this.naturalWidth, this.naturalHeight)
+
+				/** @params
+				 * 图片源，裁剪图片坐标x,y,width,height,绘制坐标x,y,width,height
+				 **/
+				ctx.drawImage(image, 0, 0, mycanvas.width, mycanvas.height)
+
+				// 裁剪一个圆
+				ctx.beginPath()
+				ctx.arc(300, 300, 200, 0, Math.PI * 2)
+				ctx.clip()
+
+				// 创建一个新canvas用来存储裁剪后的图片
+				let newCanvas = document.createElement("canvas")
+				newCanvas.width = 400
+				newCanvas.height = 400
+				let newCtx = newCanvas.getContext("2d")
+				// newCtx.drawImage(image, 0, 0, newCanvas.width, newCanvas.height)
+				newCtx.drawImage(mycanvas, 0, 0)
+
+				let newResult = newCanvas.toDataURL("image/png")
+				console.log(newResult)
+				let newImg = document.createElement("img")
+				newImg.src = newResult
+				document.body.appendChild(newImg)
+			}
+		</script>
+	</body>
+</html>
